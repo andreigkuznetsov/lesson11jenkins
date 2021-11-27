@@ -42,7 +42,6 @@ tasks.withType(Test) {
 
     systemProperties(System.getProperties())
     useJUnitPlatform()
-    System.setProperty("remoteUrlSelenoid", "remoteUrlSelenoid")
 
     testLogging {
         lifecycle {
