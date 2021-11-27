@@ -12,18 +12,21 @@ import yahoo.andreikuzn.pages.RegistrationPage;
 import org.aeonbits.owner.ConfigFactory;
 
 import static com.codeborne.selenide.Configuration.remote;
+import static java.lang.String.format;
 
 public class TestBase {
 
-    static ConfigurationSelenoidSets cfg = ConfigFactory.create(ConfigurationSelenoidSets.class);
     RegistrationPage registrationPage = new RegistrationPage();
 
     @BeforeAll
     static void setup() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+        ConfigurationSelenoidSets cfg = ConfigFactory.create(ConfigurationSelenoidSets.class);
+        String login = cfg.login();
+        String password = cfg.password();
+
         Configuration.startMaximized = true;
-        remote = String.format("https://%s:%s@selenoid.autotests.cloud/wd/hub/",
-                cfg.login(), cfg.password());
+        Configuration.remote = format("https://%s:%s@selenoid.autotests.cloud/wd/hub/", login, password);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
