@@ -7,5 +7,6 @@ public interface ConfigurationSelenoidSets extends Config {
 
     String login();
     String password();
+    String url();
 
 }

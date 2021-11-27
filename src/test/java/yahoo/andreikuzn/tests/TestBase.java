@@ -24,9 +24,10 @@ public class TestBase {
         ConfigurationSelenoidSets cfg = ConfigFactory.create(ConfigurationSelenoidSets.class);
         String login = cfg.login();
         String password = cfg.password();
+        String url = cfg.url();
 
         Configuration.startMaximized = true;
-        Configuration.remote = format("https://%s:%s@selenoid.autotests.cloud/wd/hub/", login, password);
+        Configuration.remote = format("https://%s:%s@%s", login, password, url);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
